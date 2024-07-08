@@ -35,9 +35,11 @@ export async function getStaticPaths(){
     const allpostitems = testetete.data.posts.nodes;
     console.log(allpostitems);
     let allpostslugs = [];
-    allpostitems.map((postslug, index)=>( 
-        allpostslugs.push("/blogs/"+postslug.slug+"/"+postslug.postId)
-    ))
+    allpostitems.map((postslug, index) => ( 
+        postslug.slug !== null 
+          ? allpostslugs.push(`/blogs/${postslug.slug}/${postslug.postId}`)
+          : null
+    )) 
     console.log(allpostslugs);
   return{
       paths: allpostslugs,
@@ -55,11 +57,11 @@ export default function ServicePage({singlepostdata}) {
   const categorylist = singlepostdata.data.postBy.categories.nodes;
   
   const relatedpost = singlepostdata.data.postBy.selectRelatedPostHere.relatedPost;
-  console.log(relatedpost.relatedPost);
+  // console.log(relatedpost.relatedPost);
   // const searchParams = useSearchParams()
   // console.log(searchParams.get('serviceID'));
   
-  useScript('https://code.jquery.com/jquery-3.7.0.min.js');
+    useScript('https://code.jquery.com/jquery-3.7.0.min.js');
     useScript('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js');
     useScript('https://cdn.jsdelivr.net/npm/locomotive-scroll@beta/bundled/locomotive-scroll.min.js');
     useScript('./custominit.js');
@@ -112,14 +114,26 @@ export default function ServicePage({singlepostdata}) {
           RELATED
           <br /> POST
         </h3>
-        <h4><Link href={"/blogs/"+relatedpost.slug+"/"+relatedpost.postId}>{relatedpost.title}</Link></h4>
-        <div dangerouslySetInnerHTML={{ __html: relatedpost.content.substring(0, 300)}}></div>
+        { relatedpost === null || relatedpost.slug === undefined
+          ?  undefined
+          : <h4><Link href={"/blogs/"+relatedpost.slug+"/"+relatedpost.postId}>{relatedpost.title}</Link></h4>
+        }
+        { relatedpost === null || relatedpost.slug === undefined 
+          ?  undefined
+          : <div dangerouslySetInnerHTML={{ __html: relatedpost.content.substring(0, 300)}}></div>
+        }
+        {/* <h4><Link href={"/blogs/"+relatedpost.slug+"/"+relatedpost.postId}>{relatedpost.title}</Link></h4> */}
+        {/* <div dangerouslySetInnerHTML={{ __html: relatedpost.content.substring(0, 300)}}></div> */}
       </div>
-      <div className="relatedimg">
+      {
+        relatedpost === null || relatedpost.slug === undefined 
+        ? undefined
+        : <div className="relatedimg">
         <Link href={"/blogs/"+relatedpost.slug+"/"+relatedpost.postId}>
           <Image src={relatedpost.featuredImage.node.sourceUrl} width={600} height={300} className="blogimage" alt={relatedpost.slug}/>
         </Link>
       </div>
+      }
     </div>
   </div>
 </section>

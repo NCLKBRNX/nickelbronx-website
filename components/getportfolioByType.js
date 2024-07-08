@@ -118,7 +118,11 @@ export function getPortfolioLongPage(singlePortfolio){
         </div>
         <div className="functionality-info-sec">
           <div className="functionality-image">
-              <img src={websitedesign.sideImage1.sourceUrl} height={600} width={400} alt={headertitle} />
+              {
+                websitedesign.sideImage1.sourceUrl !== undefined 
+                ? <img src={websitedesign.sideImage1.sourceUrl} height={600} width={400} alt={headertitle} />
+                : null
+              }     
           </div>
           <div className="functionality-image">
               <img src={websitedesign.sideImage2.sourceUrl} height={600} width={400} alt={headertitle} />
@@ -126,14 +130,14 @@ export function getPortfolioLongPage(singlePortfolio){
           <div className="functionality-image w-full">
               <img src={websitedesign.bigImage.sourceUrl} height={600} width={400} alt={headertitle} />
           </div>
-          { takeaways.sideImage1 !== null 
+          {/* { takeaways.sideImage1.sourceUrl !== null 
             ?  <div className="functionality-image"><img src={takeaways.sideImage1.sourceUrl} height={600} width={400} alt={headertitle} /></div>
             : null
-          }
-          { takeaways.sideImage2 !== null 
+          } */}
+          {/* { takeaways.sideImage2 !== null 
             ?  <div className="functionality-image"><img src={takeaways.sideImage2.sourceUrl} height={600} width={400} alt={headertitle} /></div>
             : null
-          }
+          } */}
         </div>
       </div>
     </section>
