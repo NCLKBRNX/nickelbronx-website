@@ -77,7 +77,7 @@ export default function SiteHeader({className}){
                 </li>
                 <li>
                     
-                    <Link href="/merch">MERCH</Link>
+                    <Link href="https://store.nickelbronx.com/?utm_medium=email&_hsenc=p2ANqtz-_kPd6ycKbYTIwTe0FekR-77PiyjtvMCxjufJfCjILlPnx5JzyJrf4K5TP45nbIkYe1VvrdTydnEyY8eMzYQwk6htZUrw&_hsmi=310333723&utm_content=310333723&utm_source=hs_email">MERCH</Link>
                 </li>
                 <li className="button">
                     
